@@ -15,47 +15,9 @@
           </li>
         </ul>
       </div>
-    <!-- <img src="./assets/WillPic.jpg" alt="Image of Will"> -->
     </nav>
     <br><br>
-    <div class="container">
-
-<!--     <form>
-      <p>Please fill out the following information: <p>
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Name</label>
-        <input v-model="name" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Full Name...">
-      </div>
-       <div class="form-group">
-        <label for="exampleFormControlInput2">Email address</label>
-        <input v-model="email" type="text" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput3">Street address</label>
-        <input v-model="address" type="text" class="form-control" id="exampleFormControlInput3" placeholder="123 Main St.">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput4">State</label>
-        <input v-model="state" type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter state...">
-        {{ state }}</div>
-      <div class="form-group">
-        <label for="exampleFormControlInput5">Zip</label>
-        <input v-model="state" type="text" class="form-control" id="exampleFormControlInput5" placeholder="Enter zip...">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput6">To whom would you like to leave your personal property?</label>
-        <input v-model="beneficiary" type="name" class="form-control" id="exampleFormControlInput6" placeholder="Full Name...">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput7">If the person named above does not survive you by 30 days, to whom would you like to leave your personal property?</label>
-        <input v-model="secondaryBeneficiary" type="name" class="form-control" id="exampleFormControlInput7" placeholder="Full Name...">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">List your personal property:</label>
-        <textarea v-model="property" class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-      </div>
-    </form> -->
+  <div class="footer">  <p><a style = "color: black;" href="https://github.com/jcleona/newCreativeProject3"><br>See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
   </div>
 </div>
 
@@ -77,12 +39,6 @@ export default {
       property: ''
     }
   },
-  mounted () {
-    // this.$nextTick(() => {
-    //   $('hello').hide();
-    //   $('hello').fadeIn('slow');
-    // });
-  }
 }
 </script>
 
@@ -102,13 +58,23 @@ li {
 a {
   color: #42b983;
 }
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: AntiqueWhite;
+   color: black !important;
+   text-align: center;
+}
+#git {
+  width: 1.4vw;
+  height: 1.4vw;
+}
 
 .bg {
   /* The image used */
-  /*background-image: url("assets/WillPic.jpg");*/
-  /*background-image: url("/src/assets/logo.png");*/
   background-image: url("https://troyergood.files.wordpress.com/2016/11/last-will.jpg?w=760");
-  /*background-image: url("https://www.southerncoalition.org/wp-content/uploads/2015/12/Justice-1030x686.jpg");*/
 
   /* Full height */
   height: 100%;
