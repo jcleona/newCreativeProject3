@@ -62,10 +62,11 @@
         <textarea v-model="property" class="form-control" id="FormControlTextarea" rows="6"></textarea>
       </div>
       <div class="form-group form-control btn-outline-secondary">
-        <button type="submit" v-on:click="buildWill" class="btn btn-default">Click Here to See Your Will</button><br>
+        <button type="submit" v-on:click.prevent="buildWill" class="btn btn-default">Click Here to See Your Will</button><br>
       </div>
     </form><br>
-    <div v-if="readyWill">
+    <div>
+    <!-- <div v-if="readyWill"> -->
       <p v-for="part in willParts">
        {{ part }}</p>
     </div>
@@ -97,7 +98,7 @@ export default {
   },
   methods: {
     buildWill: function () {
-      this.readyWill = false;
+      // this.readyWill = false;
       this.willParts.splice(0, 1, 'LAST WILL AND TESTAMENT OF: ' + this.name);
       this.willParts.splice(1, 1, 'I, ' + this.name + ', of ' + this.city + ', ' + this.state + ', being of sound mind and body do hereby declare that this document is my last will and testament. ');
       this.willParts.splice(2, 1, 'In executing such document, I hereby declare that: ');
