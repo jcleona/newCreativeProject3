@@ -140,7 +140,6 @@ a {
    left: 0;
    bottom: 0;
    padding-top: 16px;
-   /*padding-top: calc(12px + .6vw);*/
    width: 100%;
    background-color: DarkTurquoise ;
    color: black !important;
