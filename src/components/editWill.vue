@@ -10,7 +10,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="#">Will</a>
           </li>
           <li class="nav-item">
@@ -25,7 +25,9 @@
     <br><br>
     <div class="container">
     <form>
-      <p>Start your will by filling out the following information: <p>
+      <div style = "background-color: Gainsboro;" class="text-center form-group form-control btn-outline-secondary">
+        <button type="submit" v-on:click.prevent="loadUser" class="btn btn-default">Edit Will Information</button><br>
+      </div>
       <div class="form-group">
         <label for="FormControlInput1">Name</label>
         <input v-model="name" type="text" class="form-control" id="FormControlInput1" placeholder="Full Name...">
@@ -64,7 +66,7 @@
         <textarea v-model="property" class="form-control" id="FormControlTextarea" rows="6"></textarea>
       </div>
       <div style = "background-color: Gainsboro;" class="text-center form-group form-control btn-outline-secondary">
-        <button type="submit" v-on:click.prevent="submitUser" class="btn btn-default">Submit</button><br>
+        <button type="submit" v-on:click.prevent="editUser" class="btn btn-default">Submit to update will</button><br>
       </div>
       <div v-if="userSubmitted" style = "background-color: Gainsboro;" class="text-center form-group form-control btn-outline-secondary">
         <button type="submit" v-on:click.prevent="buildWill" class="btn btn-default">Click Here to see your will below.</button><br>
@@ -76,8 +78,8 @@
     <!-- <a href="#/ViewWill">Click Here to See Your Will in a new page</a><br> -->
     <div>
     <!-- <div v-if="readyWill"> -->
-      <p v-for="part in willParts">
-       {{ part }}</p>
+<!--       <p v-for="part in willParts">
+       {{ part }}</p> -->
     </div>
   </div>
   <br><br><br><br>
@@ -89,9 +91,10 @@
 <script>
 import router from '../router/index.js';
 export default {
-  name: 'Will',
+  name: 'editWill',
   data () {
     return {
+      editId: '',
       id: '',
       name: '',
       email: '',
@@ -119,7 +122,11 @@ export default {
      }
   },
   created() {
-     this.userSubmitted = false
+    this.getUsers();
+    let editId = this.$route.params.userId;
+    this.getUser(editId);
+
+    console.log('this.$route.params.userId: ', this.$route.params.userId, this.editId);
   }, 
   methods: {
      submitUser: function() {
@@ -157,34 +164,64 @@ export default {
        beneficiary: this.beneficiary,
        executor: this.executor,
        property: this.property,
-       readyWill: false
         });
       console.log('finishing addUser, user.id: ', this.user.id);
       },
-    getUser: function() {
-      this.$store.dispatch('getUser');
+    getUser: function(id) {
+      console.log('called getUser with id', id);
+      this.$store.dispatch('getUser',{
+        id: id,
+        });
      },  
+    loadUser: function() {
+      console.log('this.users.length: ', this.users.length)
+      for (let i=0; i<this.users.length; i++) {
+        console.log('this.users[i].id', this.users[i].id);
+        if (this.users[i].id === this.editId) {
+          let indexOfWillToEdit = i;
+          i = this.users.length;
+          console.log('indexOfWillToEdit: ', indexOfWillToEdit);
+          let userToEdit = this.users[indexOfWillToEdit];
+          console.log('userToEdit', userToEdit);
+          let name = userToEdit.name;
+          let email = userToEdit.email;
+          let address = userToEdit.address;
+          let city = userToEdit.city;
+          let state = userToEdit.state;
+          let stateAbbr = userToEdit.stateAbbr;
+          let zip = userToEdit.zip;
+          let beneficiary = userToEdit.beneficiary;
+          let executor = userToEdit.executor;
+          let property = userToEdit.property;
+          
+        }
+      }
+     },
     getUsers: function() {
       this.$store.dispatch('getUsers');
      },
-
-    editUser: function(item) {
+    editUser: function(id) {
       this.$store.dispatch('updateUser',{
-        id: user.id,
-        name: user.name,
+       id: this.user.id,
+       name: this.name,
+       email: this.email,
+       address: this.address,
+       city: this.city,
+       state: this.state,
+       stateAbbr: this.stateAbbr,
+       zip: this.zip,
+       beneficiary: this.beneficiary,
+       executor: this.executor,
+       property: this.property
         });
       },
-    deleteItem: function(item) {
+    deleteItem: function(id) {
       this.$store.dispatch('deleteUser',{
         id: user.id
         });
       }, 
-
     buildWill: function () {
       console.log ('in buildWill function');
-
-
-
       this.willParts.splice(0, 1, 'LAST WILL AND TESTAMENT OF: ' + this.name);
       this.willParts.splice(1, 1, 'I, ' + this.name + ', of ' + this.city + ', ' + this.state + ', being of sound mind and body do hereby declare that this document is my last will and testament. ');
       this.willParts.splice(2, 1, 'In executing such document, I hereby declare that: ');
@@ -200,7 +237,7 @@ export default {
        this.willParts.splice(13, 1, 'Signature of witness: ________________________________________');
        this.willParts.splice(14, 1, 'Signature of witness: ________________________________________');
        this.readyWill = true;
-    }
+    },
   },
 }
 </script>

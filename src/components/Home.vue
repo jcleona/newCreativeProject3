@@ -13,6 +13,12 @@
           <li class="nav-item">
             <a class="nav-link" href="#/Will">Will</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/ViewWill">View Will</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/ListWills">List Wills</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -77,7 +83,7 @@ a {
   background-image: url("https://troyergood.files.wordpress.com/2016/11/last-will.jpg?w=760");
 
   /* Full height */
-  height: 100%;
+ /* height: 100%;*/
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -87,7 +93,7 @@ a {
 .bg {
   width: 100vw;
   height: 100vh;
-  background-size: 100% 100%;
+  /*background-size: 100% 100%;*/
   background-repeat: no-repeat;
   position: relative;
 }
