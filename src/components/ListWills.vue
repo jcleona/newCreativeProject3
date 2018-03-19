@@ -31,7 +31,7 @@
               <th>Name</th>
               <th>ID</th>
               <th>Delete</th>
-              <!-- <th>Sent</th> -->
+              <th>Signed&nbsp &nbsp &nbsp &nbsp</th>
             </tr>
           </thead>
           <tbody>
@@ -39,18 +39,16 @@
              <td style = "color: black;">{{ user.name }}</td>
              <td style = "color: black;">{{ user.id }}</td>
              <td style = "color: black; cursor:pointer;" @click="deleteUser(user.id)">&nbsp &nbsp X</td>
-             <!-- <td ><input style = "color: black; cursor:pointer;" type="checkbox" v-model="user.sent" v-on:click="willSent(user.id)" /></td> -->
-
+             <td ><input style = "color: black; cursor:pointer;" type="checkbox" v-model="user.signed" v-on:click="updateUser(user)" /></td>
             </tr>
           </tbody>
         </table>
       </div>
-  <div class="footer">  <p><a style = "color: black;" href="https://github.com/BYU-CS260-Winter-2018/lab-4-jcleona">See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
+  <div class="footer">  <p><a style = "color: black;" href="https://github.com/jcleona/Creative-Project-4">See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
   </div>
  </div>
  </div>
 </template>
-
 <script>
 import router from '../router/index.js';
 export default {
@@ -67,6 +65,7 @@ export default {
       beneficiary: '',
       executor: '',
       property: '',
+      signed: false,
       readyWill: false,
       willParts: []
     }
@@ -82,34 +81,19 @@ export default {
      }
   },
    created: function() {
-     // this.id = this.$route.params.userId;
-     // console.log('this.$route.params.userId: ', this.$route.params.userId);
-     // console.log('after routing to View Will ');
      this.getUsers();
-     // console.log('after returning from getUsers in View Will ', this.users);
-     // this.getUser(this.id);
-     // console.log('after returning from getUser in View Will ', this.user);
-     // this.buildWill();
-     // console.log('after returning from buildWill in View Will ', this.user);
-     // readyWill: true;
    },
   methods: {
-    willSent: function(id) {
+    updateUser: function(user) {
       this.$store.dispatch('updateUser',{
-        id: id,
-        sent: true
+        id: user.id,
+        signed: !user.signed,
        }).then(response => {
         return true;
        }).catch(err => {
        });
      },
-    editWill: function(id) {
-      console.log('going to edit will for: ', id);
-      console.log('name: ', this.name);
-      router.push({ name: 'Edit Will', params: { userId: id} });
-    },
     getUser: function(id) {
-      console.log('called getUser with id', id);
       this.$store.dispatch('getUser',{
         // id: user.id
         id: this.id,
@@ -119,13 +103,6 @@ export default {
     getUsers: function() {
       this.$store.dispatch('getUsers');
      },
-
-    editUser: function(id) {
-      this.$store.dispatch('updateUser',{
-        id: user.id,
-        name: user.name,
-        });
-      },
     deleteUser: function(id) {
       this.$store.dispatch('deleteUser',{
         id: id

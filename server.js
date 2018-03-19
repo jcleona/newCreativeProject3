@@ -6,11 +6,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('dist'))
 
-
 let users = [];
 let user = {};
-let id = -1;
-
+let id = 0;
 
 app.get('/api/users', (req, res) => {
   res.send(users);
@@ -19,7 +17,6 @@ app.get('/api/users', (req, res) => {
 app.get('/api/users/:id', (req, res) => {
 	console.log ('in app.get user by id');
   let id = parseInt(req.params.id);
-  // let getIndex = users.map(item => { return user.id; }).indexOf(id); 
   let usersMap = users.map(user => { return user.id; });
   let index = usersMap.indexOf(id);
   console.log('index', index);
@@ -29,6 +26,15 @@ app.get('/api/users/:id', (req, res) => {
     return;
   }
   // res.sendStatus(200);
+  res.send(user);
+});
+
+app.put('/api/users/:id', (req, res) => {
+  let id = parseInt(req.params.id);
+  let usersMap = users.map(user => { return user.id; });
+  let index = usersMap.indexOf(id);
+  let user = users[index];
+  user.signed = req.body.signed;
   res.send(user);
 });
 
@@ -50,44 +56,15 @@ app.post('/api/users', (req, res) => {
   res.send(user);
 });
 
-app.put('/', (req, res) => {
-  res.send('I am updated.\n');
-});
-
-
-app.put('/api/users/:id', (req, res) => {
-  let id = parseInt(req.params.id);
-  // let id = req.params.id;
-
-  let editedUser = {id:id, name:req.body.name,
-    email: req.body.email,
-    address: req.body.address,
-    city: req.body.city,
-    state: req.body.state,
-    stateAbbr: req.body.stateAbbr,
-    zip: req.body.zip,
-    beneficiary: req.body.beneficiary,
-    executor: req.body.executor,
-    property: req.body.property
-  }
-  users.splice(id, 1, editedUser);
-  res.send(users);
-});
-
-
-
-
 app.delete('/api/users/:id', (req, res) => {
   let id = parseInt(req.params.id);
   console.log('id to delete: ', id);
   let removeIndex = users.map(user => { return user.id; }).indexOf(id);
-  console.log('removeIndex: ', removeIndex);
   if (removeIndex === -1) {
     res.status(404).send("Sorry, that user doesn't exist");
     return;
   }
   users.splice(removeIndex, 1);
-  console.log('removeIndex: ', removeIndex);
   console.log('users after delete: ', users);
   res.sendStatus(200);
 });

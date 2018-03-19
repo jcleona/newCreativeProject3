@@ -23,7 +23,7 @@
       </div>
     </nav>
     <br><br>
-  <div class="footer">  <p><a style = "color: black;" href="https://github.com/jcleona/newCreativeProject3"><br>See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
+  <div class="footer">  <p><a style = "color: black;" href="https://github.com/jcleona/Creative-Project-4"><br>See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
   </div>
 </div>
 

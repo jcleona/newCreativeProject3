@@ -34,7 +34,7 @@
       {{ part }}</p>
     </div>
   </div><br><br><br><br>
-  <div class="footer">  <p><a style = "color: black;" href="https://github.com/BYU-CS260-Winter-2018/lab-4-jcleona">See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
+  <div class="footer">  <p><a style = "color: black;" href="https://github.com/jcleona/Creative-Project-4">See my code on github. <img id="git" src="../assets/GitHub-Mark.png"></a></p>
   </div>
  </div>
  </div>
@@ -104,13 +104,6 @@ export default {
     getUsers: function() {
       this.$store.dispatch('getUsers');
      },
-
-    editUser: function(user) {
-      this.$store.dispatch('updateUser',{
-        id: user.id,
-        name: user.name,
-        });
-      },
     deleteItem: function(user) {
       this.$store.dispatch('deleteUser',{
         id: user.id
